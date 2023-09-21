@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}May'Shop
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="position-absolute top-50 start-50 translate-middle text-center">
+			<h1 class="text-dark">Nouvelle Collection</h1>
+			<p class="text-dark">Les soldes de cet été arrivent</p>
+			<a href="{{ path('app_boutique')}}" class="btn btn-outline-dark mb-5 pb-5">Voir la boutique</a>
+		</div>
+		<div class="container mt-4" style=" min-height: 80vh;">
+			<h2 class="text-center my-2">En ce moment</h2>
+			<section class="row">
+				<div class="col-md-6 my-3 position-relative">
+					<img src="{{asset('img/collectionH.webp')}}" alt="" class="img-fluid">
+					<div class="position-absolute bottom-0 start-50 translate-middle text-center text-light">
+						<h3>Collection Homme</h3>
+						<a href="{{ path('app_boutique_collection', {collection: 'homme'})}}" class="text-light">ici</a>
+					</div>
+				</div>
+				<div class="col-md-6 my-3 position-relative">
+					<img src="{{asset('img/collectionF.webp')}}" alt="" class="img-fluid">
+					<div class="position-absolute bottom-0 start-50 translate-middle text-center text-light">
+						<h3>Collection Femme</h3>
+						<a href="{{ path('app_boutique_collection', {collection: 'femme'})}}" class="text-light">ici</a>
+					</div>
+				</div>
+
+			</section>
+
+			<div class="row justify-content-md-around p-4">
+				{% for item in produits %}
+
+					<div class="col-sm-6 col-md-4 col-lg-3 my-3 px-3">
+						<div class="p-4 my-1 ">
+							<div class="text-center">
+								<a href="{{ path("app_boutique_show", {id: item.id})}}">
+									<img class="text-center img-fluid image" src="{{ asset("assets/uploads/" ~ item.photo) }}" alt="">
+								</a>
+							</div>
+
+							<h5 class="my-1">{{ item.titre }}</h5>
+							<div>{{ item.collection }}</div>
+							<div>Prix :
+								{{ item.prix/100|number_format(2, '.') }}
+								€</div>
+
+							{# * si le stock de se produit est supérieur a 0 alors #}
+							{% if item.stock > 0 %}
+								<div class="text-center my-3">
+									<form
+										action="{{ path('cart_add', {id: item.id}) }}" method="post">
+										{# * si le produit actuel est déjà dans le panier #}
+										{% if cart[item.id] is defined %}
+											{# *je stock la quantité de se produit actuel dans le panier #}
+											{% set var = cart[item.id] %}
+											{# * sinon actuellement le produit est en quantité zéro dans le panier #}
+										{% else %}
+											{% set var = 0 %}
+										{% endif %}
+
+										{# * si la différence entre le stock du produit en bdd moins la quantité actuel dans le panier est supérieur a zéro alors j'affiche le select option #}
+										{% if item.stock - var > 0 %}
+
+											<div class="btn-group">
+												<select
+													name="qtAdd" class="btn btn-dark">
+													{# * pour les i allant de 1 à la différence entre stock et quantité du produit dans le panier #}
+													{% for i in 1..(item.stock - var)  %}
+														<option value="{{i}}">{{i}}</option>
+													{% endfor %}
+												</select>
+												<button type="submit" class="btn btn-dark">Acheter</button>
+											</div>
+										{% endif %}
+
+									</form>
+								</div>
+								{# * si le stock est a zéro alors afficher la rupture #}
+							{% else %}
+								<div class="text-center text-danger text-uppercase my-3">en Rupture</div>
+							{% endif %}
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

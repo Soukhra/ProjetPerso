@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenu
+{% endblock %}
+
+{% block body %}
+	
+		<style>
+			.mondiv {
+				background-image: url({{asset("assets/uploads/bg2.jpg")}});
+				background-size: cover;
+				background-repeat: no-repeat;
+			}
+		</style>
+	<main>
+		<section class="shop" id="shop">
+			<div class="container mondiv ">
+				<p>Bienvenu chez nous</p>
+			</div>
+		</section>
+	</main>
+{% endblock %}

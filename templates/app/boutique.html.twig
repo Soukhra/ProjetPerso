@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Collection{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center mt-5 mb-3">
+{% if collection %}
+Collection {{collection|capitalize }}
+{% else %}
+Nouvelle Collection
+{% endif %}
+
+</h1>
+<div class="container">
+    <div class="row">
+    {% for item in produits %}
+    
+    <div class="col-sm-6 col-md-4 col-lg-3 my-3 px-3">
+    <div  class="p-4 my-1 " >
+        <div class="text-center">
+            <a href="{{ path("app_boutique_show", {id: item.id})}}"><img class="text-center img-fluid image" src="{{ asset("assets/uploads/" ~ item.photo) }}" alt="" ></a>
+        </div>
+        
+        <h5 class="my-1">{{ item.titre }}</h5>
+        <div>{{ item.collection }}</div>
+        <div >Prix : {{ item.prix/100|number_format(2, '.') }} €</div>
+        {% if item.stock > 0 %}
+        <div class="text-center my-3">
+            {% if collection %}
+                <a href="{{ path('cart_add_route', {id: item.id, route: collection}) }}" class="btn btn-dark col-9">Ajouter au panier</a>
+            {% else %}
+                <a href="{{ path('cart_add_route', {id: item.id, route: 'boutique'}) }}" class="btn btn-dark col-9">Ajouter au panier</a>
+            {% endif %}
+            
+        </div>
+        {% else %}
+            <div class="text-center text-danger text-uppercase my-3">en Rupture</div>
+        {% endif %}
+        {# <a href="{{path('app_show', {id: item.id})}}" class="btn btn-dark col-md-auto"> Commander</a> #}
+            </div>
+        </div>
+    
+{% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

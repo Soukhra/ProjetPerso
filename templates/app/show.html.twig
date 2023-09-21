@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}T-shirt{% endblock %}
+
+{% block body %}
+<div class="mt-5">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <img src="{{ asset("assets/uploads/" ~ produit.photo) }}" alt="">
+            </div>
+            <div class="col-lg-4 py-5">
+                <h2 class="text-center">{{ produit.titre }}</h2>
+                <p class="text-center h4">{{ produit.prix/100 }} </p>
+                <p class="my-4 text-center">{{ produit.description|striptags }}</p>
+
+                {% if produit.stock > 0 %}
+                <div class="text-center my-3">
+                    <form action="{{ path('cart_add', {id: produit.id}) }}" method="post">
+                        {% if cart[produit.id] is defined %}
+                            {% set var = cart[produit.id] %}
+                        {% else %}
+                            {% set var = 0 %}
+                        {% endif %}
+                        {% if produit.stock - var > 0 %}
+
+                            <div class="btn-group">
+                                <select name="qtAdd" class="btn btn-dark" >
+                                    {% for i in 1..(produit.stock - var)  %}
+                                        <option value="{{i}}">{{i}}</option>
+                                    {% endfor %}
+                                </select>
+                                <button  type="submit" class="btn btn-dark">Acheter</button>
+                            </div>
+                        {% endif %}
+                    </form>
+                </div>
+                {% else %}
+                <div class="text-center text-danger text-uppercase my-3">en Rupture</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
