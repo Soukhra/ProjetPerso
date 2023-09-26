@@ -4,23 +4,39 @@ namespace App\Controller;
 
 use App\Entity\Address;
 use App\Form\AddressType;
+use App\Repository\UserRepository;
 use App\Repository\AddressRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/address')]
 class AddressController extends AbstractController
 {
     #[Route('/', name: 'app_address_index', methods: ['GET'])]
-    public function index(AddressRepository $addressRepository): Response
+    public function userAddresses(Request $request): Response
     {
+        // Récupérez l'utilisateur connecté
+        $user = $this->getUser();
+
+        // Vérifiez si l'utilisateur est connecté
+        if (!$user) {
+            // Gérer le cas où l'utilisateur n'est pas connecté
+            // Redirigez vers la page de connexion ou affichez un message d'erreur
+            // Vous pouvez utiliser la méthode $this->redirectToRoute() pour rediriger l'utilisateur vers la page de connexion.
+            $this->redirectToRoute('app_login') ;
+        }
+        // Récupérez les adresses de l'utilisateur connecté
+        $addresses = $user->getAddresses();
+
         return $this->render('address/index.html.twig', [
-            'addresses' => $addressRepository->findAll(),
+            'user' => $user,
+            'addresses' => $addresses,
         ]);
     }
+      
 
     #[Route('/new', name: 'app_address_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -30,6 +46,8 @@ class AddressController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            $address->setUser($user);
             $entityManager->persist($address);
             $entityManager->flush();
 

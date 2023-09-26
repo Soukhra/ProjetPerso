@@ -6,11 +6,11 @@
 {% block body %}
 	<div class="container">
 		<div class="position-absolute top-50 start-50 translate-middle text-center">
-			<h1 class="text-dark">Nouvelle Collection</h1>
-			<p class="text-dark">Les soldes de cet été arrivent</p>
+			
+			
 			<a href="{{ path('app_boutique')}}" class="btn btn-outline-dark mb-5 pb-5">Voir la boutique</a>
 		</div>
-		<div class="container mt-4" style=" min-height: 80vh;">
+		<div class="container mt-5 pt-5" style=" min-height: 70vh;">
 			<h2 class="text-center my-2">En ce moment</h2>
 			<section class="row">
 				<div class="col-md-6 my-3 position-relative">
@@ -72,7 +72,7 @@
 														<option value="{{i}}">{{i}}</option>
 													{% endfor %}
 												</select>
-												<button type="submit" class="btn btn-dark">Acheter</button>
+												<button type="submit" class="btn btn-dark">Ajouter au panier</button>
 											</div>
 										{% endif %}
 

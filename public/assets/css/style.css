@@ -147,11 +147,11 @@
     }
     
     img.image {
-        width: 25%;
-        height: 25%;
+        width: 50%;
+        height: 50%;
     }
     
-    @media (max-width: 900px) {
+    @media (max-width: 1200px) {
         #menu-icon {
             display: block;
         }
@@ -160,7 +160,7 @@
             background: var(--principal-color);
         }
         .navbar {
-            top: -600px;
+            top: -700px;
             left: 0;
             right: 0;
             position: absolute;
@@ -181,6 +181,19 @@
         }
         a.compte {
             display: block;
+        }
+        i.compte {
+            display: none;
+        }
+    }
+    
+    @media (max-width: 400px) {
+        .logo {
+            font-weight: 0.5rem;
+            font-size: 1.5rem;
+        }
+        i.compte {
+            display: none;
         }
     }
     

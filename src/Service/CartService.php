@@ -40,9 +40,11 @@ class CartService
                 {
                     $cart[$id] += $qtAdd;
                     $qt += $qtAdd;
+                    $this->rs->getSession()->getFlashBag()->add('success', 'le produit a été ajouté au panier, connectez vous pour voir votre panier si vous n\'etes pas deja connecté');
                 }
                 else
                 {
+                    // $this->addFlash('danger', 'le produit a un stock limité');
                     $this->rs->getSession()->getFlashBag()->add('danger', 'le produit a un stock limité');
                 }
             }else

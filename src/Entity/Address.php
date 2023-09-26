@@ -15,29 +15,29 @@ class Address
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $full_name = null;
+    public ?string $full_name = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $address = null;
+    public ?string $address = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $address_complement = null;
+    public ?string $address_complement = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $ville = null;
+    public ?string $ville = null;
 
     #[ORM\Column]
-    private ?int $postal = null;
+    public ?int $postal = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $pays = null;
+    public ?string $pays = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $phone = null;
+    public ?string $phone = null;
 
     #[ORM\ManyToOne(inversedBy: 'addresses')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+    public ?User $user = null;
 
     public function getId(): ?int
     {

@@ -51,6 +51,7 @@ class CartController extends AbstractController
             $qtAdd = $request->request->get('qtAdd');
             $cs->add($id, $qtAdd);
             return $this->redirectToRoute('app_app');
+            $this->addFlash('succes', 'le produit a été ajouté au panier');
         }
         //* sinon toujours rediriger vert le panier
         else{

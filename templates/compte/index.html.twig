@@ -16,16 +16,12 @@
 									<i class="ti-layout-grid2"></i>Tableau Bord</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false">
+								<a class="nav-link" id="orders-tab" data-toggle="tab" href="{{path('app_commande')}}" role="tab" aria-controls="orders" aria-selected="false">
 									<i class="ti-shopping-cart-full"></i>Commandes</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" id="address-tab" data-toggle="tab" href="{{path('app_address_index')}}" role="tab" aria-controls="address" aria-selected="true">
 									<i class="ti-location-pin"></i>Mon Adresse</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" id="account-detail-tab" data-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true">
-									<i class="ti-id-badge"></i>Détails</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="{{ path('app_logout')}}">
@@ -52,14 +48,13 @@
 										{{ app.user.nom | upper}}</h3>
 								</div>
 								<div class="card-body">
-									<p>Avec votre tableau de bord. vous pouvez facilement choisir &amp; visualiser votre
+									<p>Avec votre tableau de bord. vous pouvez facilement visualiser votre
 										<a href="javascript:void(0);" onclick="$('#orders-tab').trigger('click')">récentes commandes</a>, gérer vos
-										<a href="javascript:void(0);" onclick="$('#address-tab').trigger('click')">adresses de facturation et livraison</a>
-										and
-										<a href="javascript:void(0);" onclick="$('#account-detail-tab').trigger('click')">changer votre mot de passe, afficher les détails de votre compte.</a>
+										<a href="javascript:void(0);" onclick="$('#address-tab').trigger('click')">adresses de facturation et livraison.</a>
+										
 									</p>
 									{% if is_granted('ROLE_ADMIN') %}
-										<a href="" target="_blank" class="btn btn-fill-out">Accéder au backoffice</a>
+										<a href="{{path('admin')}}" target="_blank" class="btn btn-fill-out">Accéder au backoffice</a>
 									{% endif %}
 								</div>
 							</div>
