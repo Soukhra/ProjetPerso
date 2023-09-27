@@ -39,7 +39,7 @@
 
          {% if app.user %}
     
-            <a href="" class="btn btn-primary">valider votre panier</a>
+            <a href="{{path('app_checkout')}}" class="btn btn-primary">valider votre panier</a>
         
         {% else %}
             <a href="{{path('app_login')}}" class="btn btn-dark">se connecter</a> pour valider sa commande

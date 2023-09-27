@@ -2,9 +2,15 @@
 
 namespace App\Form;
 
+
+use App\Entity\Address;
+
+use App\Entity\Transport;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class CheckoutType extends AbstractType
 {
@@ -35,6 +41,7 @@ class CheckoutType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'user' => null, // Définissez la valeur par défaut pour l'option 'user'
             // Configure your form options here
         ]);
     }

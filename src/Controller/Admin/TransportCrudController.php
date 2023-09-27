@@ -24,7 +24,7 @@ class TransportCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('nomTransporteur'),
-            TextEditorField::new('description')->onlyOnForms(),
+            TextField::new('description')->onlyOnForms(),
             DateTimeField::new('updatedAt')->setFormat('d/M/Y à H:m:s')->hideOnForm(),
             MoneyField::new('prix')->setCurrency('EUR')->setNumDecimals(2),
         ];

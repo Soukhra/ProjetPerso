@@ -78,4 +78,12 @@ class Transport
 
         return $this;
     }
+    public function __toString()
+    {
+        $result = $this->nomTransporteur."[spr]";
+        $result .= $this->description."[spr]";
+        $result .= "Prix: ".($this->prix/100). '€'."[spr]";
+        
+        return $result;
+    }
 }
