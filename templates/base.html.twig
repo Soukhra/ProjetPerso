@@ -57,13 +57,10 @@
 				{% endif %}
 
 				<li>
-					<a href="#">A propos</a>
+					<a href="{{path('app_apropos')}}">A propos</a>
 				</li>
 				<li>
 					<a href="#">Contact</a>
-				</li>
-				<li>
-					<a href="#">Faq</a>
 				</li>
 			</ul>
 			<div class="icons">
@@ -87,35 +84,35 @@
 		{% block body %}{% endblock %}
 		<footer>
 			<!----About section-->
-			<section class=" about " id="about ">
+			{# <section class=" about " id="about ">
 				<div class="about-content ">
 					<h2>A propos</h2>
 					<p>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea possimus aut, temporibus assumenda necessitatibus eaque quibusdam dolorem id. Illo vitae ad repudiandae modi minima impedit eligendi cul
 					</p>
 				</div>
-			</section>
+			</section> #}
 			<!----Contact Start-->
 			<section class="contact " id="contact ">
 				<div class="main-contact ">
 					<div class="contact-content ">
 						<li>
-							<a href="">Boutique</a>
+							<a href="{{path('app_boutique')}}">Boutique</a>
 						</li>
 						<li>
-							<a href="# ">A propos</a>
+							<a href="{{path('app_apropos')}}">A propos</a>
 						</li>
 
 						<li>
-							<a href="">Mentions légales</a>
+							<a href="{{path('app_mention')}}">Mentions légales</a>
 						</li>
 					</div>
 					<div class="contact-content ">
 						<li>
-							<a href="# ">Panier</a>
+							<a href="{{path('app_cart')}}">Panier</a>
 						</li>
 						<li>
-							<a href="">Politique de confidentialité</a>
+							<a href="{{path('app_politique')}}">Politique de confidentialité</a>
 						</li>
 						<li>
 							<a href="# ">Methodes de payement</a>
@@ -148,7 +145,7 @@
 				</div>
 			</section>
 			<div class="last">
-				<p>© 2023 par Maye.Proudly created with Maye
+				<p>© 2023 par BKShop
 				</p>
 			</div>
 		</footer>

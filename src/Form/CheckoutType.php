@@ -41,7 +41,7 @@ class CheckoutType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'user' => null, // Définissez la valeur par défaut pour l'option 'user'
+            'user'=> array()// Définissez la valeur par défaut pour l'option 'user'
             // Configure your form options here
         ]);
     }

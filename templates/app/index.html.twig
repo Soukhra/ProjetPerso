@@ -1,27 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}May'Shop
+{% block title %}BKShop
 {% endblock %}
 
 {% block body %}
 	<div class="container">
 		<div class="position-absolute top-50 start-50 translate-middle text-center">
-			
-			
 			<a href="{{ path('app_boutique')}}" class="btn btn-outline-dark mb-5 pb-5">Voir la boutique</a>
 		</div>
 		<div class="container mt-5 pt-5" style=" min-height: 70vh;">
 			<h2 class="text-center my-2">En ce moment</h2>
 			<section class="row">
-				<div class="col-md-6 my-3 position-relative">
-					<img src="{{asset('img/collectionH.webp')}}" alt="" class="img-fluid">
+				<div class="col-md-4 my-3 position-relative">
+					<img src="{{asset('img/chemiseHomme1.jpg')}}" alt="" class="img-fluid">
 					<div class="position-absolute bottom-0 start-50 translate-middle text-center text-light">
 						<h3>Collection Homme</h3>
 						<a href="{{ path('app_boutique_collection', {collection: 'homme'})}}" class="text-light">ici</a>
 					</div>
 				</div>
-				<div class="col-md-6 my-3 position-relative">
-					<img src="{{asset('img/collectionF.webp')}}" alt="" class="img-fluid">
+				<div class="col-md-4 my-3 position-relative">
+					<img src="{{asset('img/collectionEnfant.jpg')}}" alt="" class="img-fluid">
+					<div class="position-absolute bottom-0 start-50 translate-middle text-center text-light">
+						<h3>Collection Enfant</h3>
+						<a href="{{ path('app_boutique_collection', {collection: 'homme'})}}" class="text-light">ici</a>
+					</div>
+				</div>
+				<div class="col-md-4 my-3 position-relative">
+					<img src="{{asset('img/collectionFemme.jpg')}}" alt="" class="img-fluid">
 					<div class="position-absolute bottom-0 start-50 translate-middle text-center text-light">
 						<h3>Collection Femme</h3>
 						<a href="{{ path('app_boutique_collection', {collection: 'femme'})}}" class="text-light">ici</a>

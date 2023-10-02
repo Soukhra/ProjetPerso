@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation commande{% endblock %}
+
+
+{% block body %}
+    
+
+    <div class="section checkout">
+	    <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="heading_s1">
+                        <h4>Votre adresse de livraison</h4>
+                        <div class="content" id="address">
+                            {{ commande.adresseLivraison | replace({'[spr]' : '<br>'}) | raw}}
+                             {# <a href="{{ path('address_edit',{'id': address.id})}}" class="btn btn-fill-out mt-1">Editer l'adresse</a>
+                            <a href="{{ path('checkout_edit')}}" class="btn btn-fill-out mt-1">Changer l'adresse</a>   #}
+                        </div>
+                    </div>
+                    <div class="heading_s1">
+                        <h4>Votre transporteur</h4>
+                            <div class="content" id="carrier">
+                              {{ commande.nomTransporteur  | replace({'[spr]' : '<br>'}) | raw }}
+                             <a href="{{ path('checkout_edit')}}" class="btn btn-fill-out mt-1">Changer de transporteur</a>
+                            </div>
+                    </div>
+                
+                    <div class="heading_s1">
+                        <h4>Please, Verify Additional information</h4>
+                        <div class="form-group mb-0" id="informations">
+                            {{commande.moreInformations }}
+                        </div>
+                    </div>
+                      
+                </div>
+                <div class="col-md-6">
+                <div class="order_review">
+                    <div class="heading_s1">
+                        <h4>Votre commande</h4>
+                    </div>
+                    <div class="table-responsive order_table">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Produit</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                             {% for element in cart %}
+                                    <tr>
+                                        <td> {{ element.produit.nomProduit }} <span class="product-qty">x {{ element.quantity }}</span></td>
+                                        <td>€ {{ element.produit.prix/100 }}</td>
+                                    </tr>
+                                    {% endfor %}
+ 
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Total</th>
+                                    <td class="product-subtotal">€ {{ total }}</td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>Frais Transport ( {{commande.nomTransport}})</th>
+                                    <td class="product-subtotal">€ {{ commande.prixTransporteur.price/100 }}</td>
+                                </tr>
+                                
+                            </tfoot>
+
+                        </table>
+                    </div>
+                    <div class="payment_method">
+                        <div class="heading_s1">
+                            <h4>Paiement</h4>
+                        </div>
+                      
+                        <button type="submit" id="checkout-button" 
+                            class="btn btn-fill-out btn-block">
+                            Payer | € {{total + commande.prixTransporteur /100 }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">/*clé public  */
+       var stripe = Stripe("{{ apiKeyPublic }}");
+       var checkoutButton = document.getElementById("checkout-button");
+
+    checkoutButton.addEventListener("click", function () {
+      fetch("/create-checkout-session/{{ reference }}", {
+        method: "POST",
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (session) {
+          return stripe.redirectToCheckout({ sessionId: session.id });
+        })
+        .then(function (result) {
+          // If redirectToCheckout fails due to a browser or network
+          // error, you should display the localized error message to your
+          // customer using error.message.
+          if (result.error) {
+            alert(result.error.message);
+          }
+        })
+        .catch(function (error) {
+          console.error("Error:", error);
+        });
+    });
+    </script>
+{% endblock %}

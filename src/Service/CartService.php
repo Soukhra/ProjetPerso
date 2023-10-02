@@ -2,8 +2,13 @@
 
 namespace App\Service;
 
+use DateTime;
+use App\Entity\Commande;
 use App\Repository\ProduitRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+
 
 class CartService
 {
@@ -11,11 +16,14 @@ class CartService
 
     private $rs;
 
+   
+
     //injection de dépendances hors d'un controller : constructeur
     public function __construct(ProduitRepository $repo, RequestStack $rs)
     {
         $this->rs = $rs;
         $this->repo = $repo;
+       
     }
     public function cart()
     {
@@ -155,4 +163,54 @@ class CartService
         return $total;
 
     }
+    public function saveCommande($data, $user)
+    {
+        
+        // dd($data);
+        $commande = new Commande();//remplissage de la table commande
+        $reference = $this->generateUuid();
+        $address = $data['checkout']['address'];
+        $transport = $data['checkout']['transport'];
+        $informations = $data['checkout']['informations'];
+        
+
+        $commande->setReference($reference)
+             ->setNomTransporteur($transport->getNomTransporteur())
+             ->setPrixTransporteur($transport->getPrice())
+             ->setNom($address->getNom())
+             ->setPrenom($address->getPrenom())
+             ->setAdresseLivraison($address)
+             ->setMoreInformations($informations)
+             ->setQuantitePanier($data['data']['quantite'])//voir dans CartServices.php
+             ->setTotal($data['data']['subTotalHT'])
+             ->setUser($user)
+             ->setCreatedAt(new DateTime());
+      
+
+        return $reference;
+    }
+    public function generateUuid()
+    {
+        // Initialise le générateur de nombres aléatoires Mersenne Twister
+        mt_srand((double)microtime()*100000);
+
+        //strtoupper : Renvoie une chaîne en majuscules
+        //uniqid : Génère un identifiant unique
+        $charid = strtoupper(md5(uniqid(rand(), true)));
+
+        //Générer une chaîne d'un octet à partir d'un nombre
+        $hyphen = chr(45);
+
+        //substr : Retourne un segment de chaîne
+        $uuid = ""
+        .substr($charid, 0, 8).$hyphen
+        .substr($charid, 8, 4).$hyphen
+        .substr($charid, 12, 4).$hyphen
+        .substr($charid, 16, 4).$hyphen
+        .substr($charid, 20, 12);
+        
+        return $uuid;
+    }
+    
+   
 }

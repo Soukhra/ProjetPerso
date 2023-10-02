@@ -59,5 +59,26 @@ class AppController extends AbstractController
             'cart' => $cart
         ]);
     }
+    
+    #[Route('/politique', name: 'app_politique')]
+    public function politique(): Response
+    {
+       
+        return $this->render('app/politique.html.twig');
+    }
+    #[Route('/mentions', name: 'app_mention')]
+    public function Mentions(): Response
+    {
+       
+        return $this->render('app/mention.html.twig');
+    }
+    #[Route('/apropos', name: 'app_apropos')]
+    public function Apropos(): Response
+    {
+       
+        return $this->render('app/apropos.html.twig');
+    }
+
+
 }
 

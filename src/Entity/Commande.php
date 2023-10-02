@@ -14,21 +14,7 @@ class Commande
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $nom = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $prenom = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $email = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $nomTransporteur = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $prixTransporteur = null;
-
+   
     #[ORM\Column(type: Types::TEXT)]
     private ?string $adresseLivraison = null;
 
@@ -54,71 +40,19 @@ class Commande
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\ManyToOne(inversedBy: 'commandes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Transport $transporteur = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $etat = null;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(string $nom): static
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): static
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): static
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getNomTransporteur(): ?string
-    {
-        return $this->nomTransporteur;
-    }
-
-    public function setNomTransporteur(string $nomTransporteur): static
-    {
-        $this->nomTransporteur = $nomTransporteur;
-
-        return $this;
-    }
-
-    public function getPrixTransporteur(): ?string
-    {
-        return $this->prixTransporteur;
-    }
-
-    public function setPrixTransporteur(string $prixTransporteur): static
-    {
-        $this->prixTransporteur = $prixTransporteur;
-
-        return $this;
-    }
-
+    
     public function getAdresseLivraison(): ?string
     {
         return $this->adresseLivraison;
@@ -211,6 +145,30 @@ class Commande
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getTransporteur(): ?Transport
+    {
+        return $this->transporteur;
+    }
+
+    public function setTransporteur(?Transport $transporteur): static
+    {
+        $this->transporteur = $transporteur;
+
+        return $this;
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(string $etat): static
+    {
+        $this->etat = $etat;
 
         return $this;
     }
