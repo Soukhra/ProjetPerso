@@ -52,7 +52,7 @@ class CartController extends AbstractController
         {   
             $qtAdd = $request->request->get('qtAdd');
             $cs->add($id, $qtAdd);
-            return $this->redirectToRoute('app_app');
+            return $this->redirectToRoute('app_cart');
            
         }
         //* sinon toujours rediriger vert le panier

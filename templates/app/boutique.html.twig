@@ -23,7 +23,6 @@ Collection {{collection|capitalize }}
         </div>
         
         <h5 class="my-1">{{ item.titre }}</h5>
-        <div>{{ item.collection }}</div>
         <div >Prix : {{ item.prix/100|number_format(2, '.') }} €</div>
         {% if item.stock > 0 %}
         <div class="text-center my-3">
@@ -37,7 +36,7 @@ Collection {{collection|capitalize }}
         {% else %}
             <div class="text-center text-danger text-uppercase my-3">en Rupture</div>
         {% endif %}
-        {# <a href="{{path('app_boutique_show', {id: item.id})}}" class="btn btn-dark col-md-auto"> Commander</a> #}
+       
             </div>
         </div>
     

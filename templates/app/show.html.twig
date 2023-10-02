@@ -7,12 +7,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8">
-                <img src="{{ asset("assets/uploads/" ~ produit.photo) }}" alt="">
+                <img src="{{ asset("assets/uploads/" ~ produit.photo) }}" alt="" width=60% height=70%>
             </div>
             <div class="col-lg-4 py-5">
                 <h2 class="text-center">{{ produit.titre }}</h2>
-                <p class="text-center h4">{{ produit.prix/100 }} </p>
-                <p class="my-4 text-center">{{ produit.description|striptags }}</p>
+                <p class="text-center h4">prix:{{ produit.prix/100 }} € </p>
+                <p class="my-4 text-center">description:{{ produit.description|striptags }}</p>
                 {% if produit.stock > 0 %}
                 <div class="text-center my-3">
                     <form action="{{ path('cart_add', {id: produit.id}) }}" method="post">
