@@ -18,11 +18,9 @@ class Commande
     #[ORM\Column(type: Types::TEXT)]
     private ?string $adresseLivraison = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $moreInformations = null;
-
+    
     #[ORM\Column]
-    private ?bool $isPaid = null;
+    private $isPaid = false;
 
     #[ORM\Column]
     private ?int $quantitePanier = null;
@@ -39,10 +37,6 @@ class Commande
     #[ORM\ManyToOne(inversedBy: 'commandes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
-
-    #[ORM\ManyToOne(inversedBy: 'commandes')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Transport $transporteur = null;
 
     #[ORM\Column(length: 255)]
     private ?string $etat = null;
@@ -65,17 +59,7 @@ class Commande
         return $this;
     }
 
-    public function getMoreInformations(): ?string
-    {
-        return $this->moreInformations;
-    }
-
-    public function setMoreInformations(string $moreInformations): static
-    {
-        $this->moreInformations = $moreInformations;
-
-        return $this;
-    }
+   
 
     public function isIsPaid(): ?bool
     {
@@ -149,18 +133,7 @@ class Commande
         return $this;
     }
 
-    public function getTransporteur(): ?Transport
-    {
-        return $this->transporteur;
-    }
-
-    public function setTransporteur(?Transport $transporteur): static
-    {
-        $this->transporteur = $transporteur;
-
-        return $this;
-    }
-
+   
     public function getEtat(): ?string
     {
         return $this->etat;

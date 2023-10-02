@@ -24,12 +24,6 @@ class AppController extends AbstractController
         ]);
     }
 
-    // #[Route('/compte/commandes', name:"app_commande")]
-    // public function compteCommande()
-    // {
-    //     return $this->render('app/commande.html.twig');
-    // }
-
     #[Route('/boutique/{collection}', name:"app_boutique_collection")]
     #[Route('/boutique', name:"app_boutique")]
     public function boutique( ProduitRepository $repo, $collection = null): Response

@@ -163,32 +163,7 @@ class CartService
         return $total;
 
     }
-    public function saveCommande($data, $user)
-    {
-        
-        // dd($data);
-        $commande = new Commande();//remplissage de la table commande
-        $reference = $this->generateUuid();
-        $address = $data['checkout']['address'];
-        $transport = $data['checkout']['transport'];
-        $informations = $data['checkout']['informations'];
-        
-
-        $commande->setReference($reference)
-             ->setNomTransporteur($transport->getNomTransporteur())
-             ->setPrixTransporteur($transport->getPrice())
-             ->setNom($address->getNom())
-             ->setPrenom($address->getPrenom())
-             ->setAdresseLivraison($address)
-             ->setMoreInformations($informations)
-             ->setQuantitePanier($data['data']['quantite'])//voir dans CartServices.php
-             ->setTotal($data['data']['subTotalHT'])
-             ->setUser($user)
-             ->setCreatedAt(new DateTime());
-      
-
-        return $reference;
-    }
+   
     public function generateUuid()
     {
         // Initialise le générateur de nombres aléatoires Mersenne Twister
