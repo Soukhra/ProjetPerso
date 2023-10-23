@@ -16,11 +16,11 @@
 	<body>
 		<header>
 			<!-----header start---->
-			<a href="{{path('app_app')}}" class="logo">BKShop</a>
+			<a href="{{path('app_accueil')}}" class="logo">BKShop</a>
 			<div class="fa-solid fa-bars" id="menu-icon"></div>
 			<ul class="navbar">
 				<li>
-					<a href="{{path('app_app')}}">Accueil</a>
+					<a href="{{path('app_app')}}">Boutique</a>
 				</li>
 				{% if is_granted('ROLE_ADMIN') %}
 					<li>
@@ -56,12 +56,12 @@
 					</li>
 				{% endif %}
 
-				<li>
+				{# <li>
 					<a href="{{path('app_apropos')}}">A propos</a>
 				</li>
 				<li>
 					<a href="#">Contact</a>
-				</li>
+				</li> #}
 			</ul>
 			<div class="icons">
 				
